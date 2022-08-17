@@ -1,4 +1,4 @@
-baseURL: "https://www.officegeek.dk"
+baseURL: "https://www.officegeek.online"
 languageCode: "en-us"
 title: "OfficeGeek"
 
@@ -32,7 +32,7 @@ markup:
       unsafe: true
       
 params:
-  description: "Online kurser"
+  description: "Online courses"
   logo: "/images/logo.svg"
   logo_footer: "/images/logo.svg"
   footer_text: "Siden 1995 har jeg undervist virksomheder og for kursusudbydere. Gennem årene er det blevet til rigtig mange tilfredse kursister"
@@ -43,9 +43,9 @@ params:
   ogimage: "/images/og.png"
   sitename: "OfficeGeek"
   twitter: "#"
-  email: tue@officegeek.dk
+  email: tue@officegeek.online
   phone: +45 2065 7117
-  address: Sprydet 19, 3070 Snekkersten
+  address: Sprydet 19, 3070 Snekkersten, Denmark
 
 
   social:
