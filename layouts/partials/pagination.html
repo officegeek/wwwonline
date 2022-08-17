@@ -1,0 +1,106 @@
+{{ $paginator := .Paginator }}
+
+<!-- Number of links either side of the current page. -->
+{{ $adjacent_links := 4 }}
+
+<!-- $max_links = ($adjacent_links * 2) + 1 -->
+{{ $max_links := (add (mul $adjacent_links 2) 1) }}
+
+<!-- $lower_limit = $adjacent_links + 1 -->
+{{ $lower_limit := (add $adjacent_links 1) }}
+
+<!-- $upper_limit = $paginator.TotalPages - $adjacent_links -->
+{{ $upper_limit := (sub $paginator.TotalPages $adjacent_links) }}
+
+<!-- If there's more than one page. -->
+{{ if gt $paginator.TotalPages 1 }}
+    <!-- Previous page. -->
+    <div class="relative px-4 sm:px-6 lg:px-8">
+    <nav class="flex items-center justify-between px-4 sm:px-0">
+    <div class="flex flex-1 w-0">
+    {{ if $paginator.HasPrev }}
+        <a href="{{ $paginator.Prev.URL }}#posts" class="inline-flex items-center pr-1 text-lg font-normal text-gray-900 hover:text-green-500">
+            <!-- Heroicon name: arrow-narrow-left -->
+            <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            Tidligere
+        </a>
+    {{ end }}
+    </div>
+
+    <!-- Page numbers. -->
+    {{ range $paginator.Pagers }}
+
+      {{ $.Scratch.Set "page_number_flag" false }}
+
+
+      <!-- Advanced page numbers. -->
+      {{ if gt $paginator.TotalPages $max_links }}
+
+
+        <!-- Lower limit pages. -->
+        <!-- If the user is on a page which is in the lower limit.  -->
+        {{ if le $paginator.PageNumber $lower_limit }}
+
+          <!-- If the current loop page is less than max_links. -->
+          {{ if le .PageNumber $max_links }}
+            {{ $.Scratch.Set "page_number_flag" true }}
+          {{ end }}
+
+
+        <!-- Upper limit pages. -->
+        <!-- If the user is on a page which is in the upper limit. -->
+        {{ else if ge $paginator.PageNumber $upper_limit }}
+
+          <!-- If the current loop page is greater than total pages minus $max_links -->
+          {{ if gt .PageNumber (sub $paginator.TotalPages $max_links) }}
+            {{ $.Scratch.Set "page_number_flag" true }}
+          {{ end }}
+
+
+        <!-- Middle pages. -->
+        {{ else }}
+
+          {{ if and ( ge .PageNumber (sub $paginator.PageNumber $adjacent_links) ) ( le .PageNumber (add $paginator.PageNumber $adjacent_links) ) }}
+            {{ $.Scratch.Set "page_number_flag" true }}
+          {{ end }}
+
+        {{ end }}
+
+
+      <!-- Simple page numbers. -->
+      {{ else }}
+
+        {{ $.Scratch.Set "page_number_flag" true }}
+
+      {{ end }}
+
+      <div class="hidden md:-mt-px md:flex">
+      <!-- Output page numbers. -->
+      {{ if eq ($.Scratch.Get "page_number_flag") true }}
+        <a href="{{ .URL }}#posts" class="{{ if eq . $paginator }} text-green-500 {{else }} text-gray-900 hover:text-green-500 {{ end }} px-4 inline-flex items-center text-lg font-normal">
+            {{ .PageNumber }}
+        </a>
+      {{ end }}
+      </div>
+
+    {{ end }}
+
+    <!-- Next page. -->
+    <div class="flex justify-end flex-1 w-0 -mt-px">
+    {{ if $paginator.HasNext }}
+
+        <a href="{{ $paginator.Next.URL }}#posts" class="inline-flex items-center pl-1 text-lg font-normal text-gray-900 hover:text-green-500">
+          Næste
+            <!-- Heroicon name: arrow-narrow-right -->
+            <svg class="w-5 h-5 ml-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+        </a>
+
+    {{ end }}
+    </div>
+    </nav>
+    </div>
+{{ end }}

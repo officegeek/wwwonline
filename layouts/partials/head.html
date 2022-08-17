@@ -1,0 +1,275 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<title itemprop="name">{{ if .IsHome }}{{ .Site.Title }} | {{ .Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+<meta property="og:title" content="{{ .Title }} | {{ .Site.Title }}" />
+<meta name="twitter:title" content="{{ .Title }} | {{ .Site.Title }}" />
+<meta itemprop="name" content="{{ .Title }} | {{ .Site.Title }}" />
+<meta name="application-name" content="{{ .Title }} | {{ .Site.Title }}" />
+<meta property="og:site_name" content="{{ .Site.Params.sitename }}" />
+
+<meta name="description" content="{{ .Params.description | default .Site.Params.description }}" />
+<meta property="og:description" content="{{ .Params.description | default .Site.Params.description }}" />
+<meta name="twitter:description" content="{{ .Params.description | default .Site.Params.description }}" />
+
+<base href="{{ .Permalink }}" />
+<link rel="canonical" href="{{ .Permalink }}" />
+<meta name="url" content="{{ .Permalink }}" />
+<meta name="twitter:url" content="{{ .Permalink }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+
+<meta property="og:locale" content="{{ .Language.Lang }}" />
+<meta name="language" content="{{ .Language.LanguageName }}" />
+{{ range .AllTranslations }}
+  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" title="{{ .Language.LanguageName }}" />
+{{ end }}
+
+{{ with .Params.image }}
+  <meta itemprop="image" content="{{ . | absURL }}" />
+  <meta property="og:image" content="{{ . | absURL }}" />
+  <meta name="twitter:image" content="{{ . | absURL }}" />
+  <meta name="twitter:image:src" content="{{ . | absURL }}" />
+{{ else }}
+  <meta itemprop="image" content="{{ .Site.Params.ogimage | absURL }}" />
+  <meta property="og:image" content="{{ .Site.Params.ogimage | absURL }}" />
+  <meta name="twitter:image" content="{{ .Site.Params.ogimage | absURL }}" />
+  <meta name="twitter:image:src" content="{{ .Site.Params.ogimage | absURL }}" />
+{{ end }}
+
+<meta property="og:updated_time" content={{ .Lastmod.Format "2006-01-02T15:04:05Z0700" | safeHTML }} />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href='{{ "sitemap.xml" | absURL }}' />
+
+{{ with .OutputFormats.Get "RSS" }}
+  <link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
+  <link href="{{ .Permalink }}" rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}" />
+{{ end }}
+
+{{ if eq .Section "blog" }}
+
+<!-- Pagination meta tags for list pages only -->
+{{ $paginator := .Paginate (where .Pages "Section" "blog") }} 
+{{ if $paginator }}
+  <link rel="first" href="{{ $paginator.First.URL }}" />
+  <link rel="last" href="{{ $paginator.Last.URL }}" />
+  {{ if $paginator.HasPrev }}
+    <link rel="prev" href="{{ $paginator.Prev.URL }}" />
+  {{end }}
+  {{ if $paginator.HasNext }}
+    <link rel="next" href="{{ $paginator.Next.URL }}" />
+  {{end }}
+{{end }}
+
+<meta property="og:type" content="article" />
+<meta property="og:article:published_time" content={{ .Date.Format "2006-01-02T15:04:05Z0700" | safeHTML }} />
+<meta property="article:published_time" content={{ .Date.Format "2006-01-02T15:04:05Z0700" | safeHTML }} />
+
+{{ with.Params.author }}
+  <meta property="og:article:author" content="{{humanize . }}" />
+  <meta property="article:author" content="{{humanize . }}" />
+  <meta name="author" content="{{humanize . }}" />
+{{ end }}
+
+{{ with.Params.category }}
+  <meta name="news_keywords" content="{{ index . 0 }}" />
+  <meta property="article:section" content="{{ index . 0 }}" />
+{{ end }}
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": {{ .Title }},
+    "author": {
+      "@type": "Person",
+      "name": "{{ .Site.Params.github }}"
+    },
+    "datePublished": "{{ .Date.Format "2006-01-02" }}",
+    "description": {{ .Description }},
+    "wordCount": {{ .WordCount }},
+    "mainEntityOfPage": "True",
+    "dateModified": "{{ .Lastmod.Format "2006-01-02" }}",
+    "image": {
+      "@type": "imageObject",
+      "url": "{{ with .Params.image }}{{ . | absURL }}{{ end }}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "{{ .Site.Title }}",
+      "logo": {
+        "@type": "imageObject",
+        "url": "https://www.example.com/images/brand/favicon.png"
+      }
+    }
+  }
+</script>
+{{ end }}
+
+{{ if eq .Layout "page" }}
+<meta property="og:type" content="website" />
+<meta name="author" content="{{ .Site.Params.author }}" />
+<script defer type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": "{{ .Permalink }}",
+    "sameAs": [
+      "{{ .Site.Params.github }}"
+    ],
+    "name": "{{ .Title }}",
+    "logo": "https://www.example.com/images/brand/favicon.png"
+  }
+</script>
+{{ end }}
+
+<link rel="shortcut icon" href="/images/favicons/favicon.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/favicon.png" />
+<link rel="icon" href="/images/favicons/favicon.png" sizes="32x32" />
+<link rel="icon" sizes="192x192" href="/images/favicons/favicon.png" />
+
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
+
+<meta name="twitter:site" content="{{ .Site.Params.twitter }}" />
+<meta name="twitter:creator" content="{{ .Site.Params.twitter }}" />
+
+<meta name="theme-color" content="#141414" />
+<meta name="apple-mobile-web-app-title" content="{{ .Site.Params.sitename }}" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+{{ $styles := resources.Get "/css/style.css" | postCSS }}
+
+{{ if .Site.IsServer }}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}"/>
+{{ else }}
+  {{ $styles := $styles | minify | fingerprint | resources.PostProcess }}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}"/>
+{{ end }}
+<script defer src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<!-- Memberstack --> 
+<script> window.textOverride = {
+  "profile_alt_logo": "Rediger profil",
+  "profile_nav_profile": "Profil",
+  "profile_alt_logo": "Medlemskab",
+  "profile_logout": "Log ud",
+  "profile_exit": "Afslut",
+  "profile_info": "Mine Informationer",
+  "profile_updated": "Profilen er opdateret",
+  "profile_update": "Opdater",
+  "profile_email": "E-mail adresse",
+  "profile_temp_email": "Kontakt support for at ændre din e-mail adresse",
+  "email_update": "Opdater din e-mail",
+  "profile_change_pass": "Nuværende password",
+  "profile_current_pass": "Nyt password",
+  "profile_new_pass": "Bekræft",
+  "profile_confirm_pass": "Håndter medlemskab",
+  "profile_manage_mem": "Gratis prøveperiode",
+  "profile_trial": "Aktiv",
+  "profile_active": "Gået over tiden",
+  "profile_past_due": "Afbrudt",
+  "profile_canceled": "TEST MODE - Kontakt support",
+  "profile_test": "GRATIS",
+  "profile_free": "Afbryd",
+  "profile_cancel": "Vil blive opsagt den",
+  "profile_will_cancel": "Fornyes den",
+  "profile_renew": "Dit medlemskab slutter ved periodens udløb",
+  "profile_period_end": "Bekræft din annullering",
+  "profile_confirm_cancel": "Betalingsmetode",
+  "profile_pay_method": "Slutter med",
+  "profile_ending_in": "Udløber",
+  "profile_expire": "Rediger",
+  "profile_edit": "Intet kort valgt.",
+  "profile_no_card": "Tilføj et betalingskort",
+  "profile_add_card": "Nyt betalingskort",
+  "profile_new_card_label": "Betalingskort er nu opdateret.",
+  "profile_card_updated": "Skift betalingskort",
+  "profile_change_card": "Købshistorik",
+  "profile_history": "Se",
+  "profile_view_invoice": "Fakturaer er ikke altid klar med det samme",
+  "profile_invoice_empty": "Gammel og ny adgangskode krævet",
+  "profile_password_required": "Forkert adgangskode",
+  "profile_password_err": "Dit medlemskab er lukket. Du bliver logget ud om 5 sekunder.",
+  "profile_canceled_success": "",
+  "": "Sikker Forbindelse",
+  "pay_secure_checkout": "Opdater medlemskab",
+  "pay_update_membership": "Dit medlemskab er ikke længere aktivt",
+  "pay_not_active": "Faktureres",
+  "pay_billed": "månedsvis",
+  "pay_month": "hvert år",
+  "pay_year": "hver uge",
+  "pay_week": "en gang",
+  "pay_once": "efter",
+  "pay_after": "dages gratis version",
+  "pay_trial": "Gratis",
+  "pay_free": "Faktureres en gang",
+  "pay_billed_once": "Sub Total:",
+  "pay_sub_total": "Moms",
+  "pay_tax": "Total",
+  "pay_total": "Rabatkode",
+  "pay_coupon": "Jeg har en rabatkode",
+  "pay_have_coupon": "Send",
+  "pay_apply": "Koden er ikke gyldig",
+  "pay_not_valid": "af",
+  "pay_off": "For evigt",
+  "pay_coupon_forever": "TEST MODE",
+  "pay_test": "Forny medlemskab",
+  "pay_renew": "Skift medlemskab",
+  "pay_change": "Bekræft",
+  "pay_confirm": "Bekræft og betal",
+  "pay_confirm_pay": "Start prøveperioden",
+  "pay_start_trial": "Klik for at godkende vores",
+  "pay_agree": "Vilkår",
+  "pay_terms": "og",
+  "pay_and": "Privatlivspolitik",
+  "pay_privacy": "Kontonummeret er ikke korrekt.",
+  "incorrect_number": "Kortets udløbsdato er ikke gyldig.",
+  "invalid_expiry_month": "Kortets udløbsår er ikke gyldig.",
+  "invalid_expiry_year": "Kortet er ikke længere gyldigt.",
+  "expired_card": "Kortets sikkerhedskode er forkert.",
+  "incorrect_cvc": "Kortets cvr kode er forkert - De 3 tal.",
+  "address_zip_check": "Kortet bliver afvist.",
+  "card_declined": "",
+  "reset_steps_1": "Nulstil dit password",
+  "reset_your_password": "Indtast din email adresse og så sender vi instrukser til dig",
+  "reset_enter_email": "Send e-mail ang reset af password",
+  "reset_send_reset": "Email adresse",
+  "reset_email_address": "Jeg har allerede en kode",
+  "reset_have_code": "2 af 2",
+  "reset_steps_2": "Tjek din email",
+  "reset_check_email": "Skriv din nulstillingskode og vælg derefter et nyt password",
+  "reset_enter_code": "Nulstillingskode",
+  "reset_reset_code": "Nyt password",
+  "reset_new_password": "Gentag nyt password",
+  "reset_confirm_password": "Reset password",
+  "reset_password": "Send en ny reset kode",
+  "reset_send_new": "Koden er ikke gyldig",
+  "reset_code_invalid": "Reset kode er ikke gyldig",
+  "reset_email_not_found": "",
+  "reset_code_incorrect": "Forkert email adresse eller password",
+  "": "Password er for kort: min 8 karakterer",
+  "incorrect_email_password": "Email adressen er allerede i brug",
+  "invalid_password": "Email adressen er forkert",
+  "email_taken": "Dette er dit nuværende medlemskab",
+  "invalid_email": "Intet medlemskab valgt",
+  "membership_current": "Kortinformation kræves",
+  "membership_missing": "Der er sket en fejl",
+  "err_card_required": "Du kan ikke ændre et betalt medlemsskab til et test medlemsskab",
+  "unexpected_error": "Passwords matcher ikke",
+  "invalid_confirm_password": "Password er ændret",
+  "password_change_success": "",
+  "signup_head": "Adgangskode",
+  "signup_password": "Gå til betaling",
+  "signup_button": "Allerede medlem?",
+  "signup_already": "Log ind her",
+  "signup_login": "Velkommen tilbage",
+  "login_head": "Reset mit password",
+  "login_reset_password": "Login",
+  "login_button": "Intet medlemskab?",
+  "login_need": "Sign up her",
+  "login_signup": "",
+  } </script>
+<script src="https://api.memberstack.io/static/memberstack.js?custom" data-memberstack-id="f037271920607c8bbda26318262b45ab"> </script> 
+<script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>

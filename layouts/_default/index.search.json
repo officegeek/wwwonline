@@ -1,0 +1,20 @@
+{{- $.Scratch.Add "index" slice -}}
+{{- $searchablePages := site.Pages -}}
+{{- range $index, $page := $searchablePages -}}
+	{{- if or (eq .Type "kurser") (eq .Type "page") (eq .Type "blog") -}}
+		{{- .Scratch.Set "pageData" "" -}}
+		{{- .Scratch.Set "pageContent" "" -}}
+		{{- .Scratch.Set "pageURL" "" -}}
+		{{- .Scratch.Set "pageTag" "" -}}
+
+			{{- .Scratch.Set "pageContent" $page.Plain -}}
+			{{- .Scratch.Set "pageURL" $page.Permalink -}}
+			{{- if (isset $page.Params "tags") -}}
+			{{- .Scratch.Set "pageTag" (delimit $page.Params.tags " ; ") -}}
+			{{- end -}}
+			{{- .Scratch.Set "pageData" (dict "title" $page.Title "url" (.Scratch.Get "pageURL") "content" (.Scratch.Get "pageContent") "tags" (.Scratch.Get "pageTag")) -}}
+
+			{{- $.Scratch.Add "index" (.Scratch.Get "pageData") -}}
+	{{- end -}}
+{{- end -}}
+{{- $.Scratch.Get "index" | jsonify -}}

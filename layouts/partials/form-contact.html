@@ -1,0 +1,48 @@
+<div class="mt-12">
+  <div id="contact-success" class="bg-green-50 text-green-600 p-4 text-center mb-6 rounded-md hidden">Din besked blev sendt!</div>
+  <div id="contact-error" class="bg-red-50 text-red-600 p-4 text-center mb-6 rounded-md hidden"></div>
+  <form method="POST" name="contact" class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8" data-netlify="true">
+    <div>
+      <label for="name" class="block text-base font-medium text-gray-700">Navn</label>
+      <div class="mt-1">
+        <input type="text" name="name" id="name" autocomplete="name" class="py-3 px-4 block w-full focus:ring-0 border-2 focus:border-green-500 border-gray-400 rounded-md" required>
+      </div>
+    </div>
+    <div>
+      <label for="email" class="block text-base font-medium text-gray-700">E-mail</label>
+      <div class="mt-1">
+        <input id="email" name="email" type="email" autocomplete="email" class="py-3 px-4 block w-full focus:ring-0 border-2 focus:border-green-500 border-gray-400 rounded-md" required>
+      </div>
+    </div>
+    <div class="sm:col-span-2">
+      <label for="message" class="block text-base font-medium text-gray-700">Besked</label>
+      <div class="mt-1">
+        <textarea id="message" name="message" rows="4" class="py-3 px-4 block w-full focus:ring-0 border-2 focus:border-green-500 border-gray-400 rounded-md" maxlength="2000" required></textarea>
+      </div>
+    </div>
+    <div class="sm:col-span-2">
+      <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 border-2 border-green-500 hover:border-green-600 rounded-md text-base font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none">Send</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  document.forms.contact.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const contactSuccess = document.getElementById("contact-success");
+    const contactError = document.getElementById("contact-error");
+    fetch("/", {
+      body: new FormData(event.target),
+      method: "POST",
+    })
+    .then(() => {
+      contactSuccess.classList.remove("hidden");
+      document.forms.contact.reset();
+    })
+    .catch((error) => {
+      contactError.classList.remove("hidden");
+      contactError.innerHTML = `Mislykkedes: ${error}`;
+    });
+  });
+  
+</script>

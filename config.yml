@@ -1,0 +1,94 @@
+baseURL: "https://www.officegeek.dk"
+languageCode: "en-us"
+title: "OfficeGeek"
+
+enableEmoji: true
+enableGitInfo: true
+enableRobotsTXT: true
+canonifyURLs: true
+
+paginate: 12
+
+outputFormats:
+  search:
+    baseName: search
+    isPlainText: true
+    mediaType: application/json
+outputs:
+  home:
+    - HTML
+    - RSS
+    - search
+
+taxonomies:
+  categories: 'categories'
+  kategorier: 'kategorier'
+permalinks:
+  kategorier: "/:slug"
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+      
+params:
+  description: "Online kurser"
+  logo: "/images/logo.svg"
+  logo_footer: "/images/logo.svg"
+  footer_text: "Siden 1995 har jeg undervist virksomheder og for kursusudbydere. Gennem årene er det blevet til rigtig mange tilfredse kursister"
+  contact_text: "Kontakt mig hvis du har nogle spørgsmål."
+  copyright: "Copyright © 2022"
+  author: "OfficeGeek"
+  github: "#"
+  ogimage: "/images/og.png"
+  sitename: "OfficeGeek"
+  twitter: "#"
+  email: tue@officegeek.dk
+  phone: +45 2065 7117
+  address: Sprydet 19, 3070 Snekkersten
+
+
+  social:
+    facebook: "#"
+    youtube: "#"
+    linkedin: "#"
+
+  navbar:
+  - name: Kurser
+    url: "/kurser/"
+  - name: Webinar
+    url: "/webinar/"
+  - name: En til En
+    url: "/en-til-en/"
+  - name: Spørgsmål
+    url: "/sporgsmal/"
+  - name: Blog
+    url: "/blog/"
+  - name: Om
+    url: "/om/"
+  - name: Kontakt
+    url: "/kontakt/"
+
+  footer_1:
+    heading: Ydelser
+    links: 
+    - name: Kurser
+      url: "/kurser/"
+    - name: Webinar
+      url: "/webinar/"
+    - name: En til En
+      url: "/en-til-en/"
+    - name: Spørgsmål
+      url: "/sporgsmal/"
+
+  footer_2:
+    heading: Links
+    links: 
+    - name: Blog
+      url: "/blog/"
+    - name: Om
+      url: "/om/"
+    - name: Kontakt
+      url: "/kontakt/"
+    - name: Terms
+      url: "/terms/"

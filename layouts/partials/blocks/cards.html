@@ -1,0 +1,37 @@
+<div class="relative bg-white py-16 lg:py-32 px-4 sm:px-6 lg:px-8 bg-cover bg-no-repeat" style="background-image: url(/images/shape-4.svg);">
+  <div class="mx-auto max-w-md sm:max-w-3xl lg:max-w-7xl">
+    
+    <div class="text-center">
+      {{ with .heading }}
+        <h2 class="text-4xl font-semibold leading-tight md:leading-tight text-gray-900 md:text-5xl">{{ . | markdownify }}</h2>
+      {{ end }}
+
+      <svg class="mx-auto mt-4" width="76" height="11" viewBox="0 0 76 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+        <use xlink:href="#_Image5" x="0" y="0" width="76px" height="11px"/>
+        <defs>
+            <image id="_Image5" width="76px" height="11px" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAAALCAYAAADVymv/AAAACXBIWXMAAA7EAAAOxAGVKw4bAAACBklEQVRIieXWO2sVURQF4O9oJIgSX0hQfN0JapA0YiMOooWFYGNlIziVnYWdjf/Bv+AUFiltUygWAyIRCQmS5k5QxAeiJhcfhASPxRlQjAnmyYWs6swezt5r1uyz9gk2GFlVnMM3dDDXhFvY1qxPEveg549tWwkf8ap53olZTDVr6EWnzstn60hfWOuEWVUcx36cIO6HyGXpA1sY8FuctcZrvEUbnSC08R7vMFPn5fPVFliVYFlVXCWeQm9kL47ilCRKt2EWExgPtAnPMFnn5evlJPkvwbKq6Je64lIUr2Ef5nEWW5ZFu7vQxieMBeExxvCpzssPi21YVLCsKg5hEENRvCl1zmbAcBAeYKLOy6m/Xy4QLKuK08SrkSs4sxEMJe95hWl8bWJz+LGMHNulU7ANO7ALB6RhcHAFnMYwEoQpPKnz8iWNYM2Ra0XxDi5i9woKLIUORjHRGPE0vkvTcgaf67ycXOOaIKuKIfRJAvZJAvZF8QjO43QTWwpPMR6E+yGriv4o3sWtVXL7IfnBB4wG4bn0l75g/l/t3Q3IqqIlXWEOEy9EzknD65iF0/xnaFU37uH2Mut0JNXfNhNnAuN1XrZXR797kFXFoGRJ+5puzHG2B0f+M8ejIDzEG0zVeflifah2BxqLWGATPZJfdfBEujkPNCO2E8XrQRjGCL4uNW43C34Bl6SaKLMT/fAAAAAASUVORK5CYII="/>
+        </defs>
+      </svg>     
+
+      {{ with .subheading }}
+        <p class="mt-4 text-gray-800 text-[1.375rem] leading-relaxed">{{ . }}</p>
+      {{ end }}
+    </div>
+
+    <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:gap-12 lg:grid-cols-4 text-center mt-14">
+      {{ range .cards }}
+        <div>
+          <div class="inline-flex items-center justify-center text-gray-700 rounded-lg bg-[#D3F2DE] w-20 h-20">
+            {{ $icon := printf "%s%s%s" "icons/" .icon ".svg" }}
+            {{ if templates.Exists (printf "%s%s" "partials/" $icon ) }}
+              {{ partial $icon }}
+            {{ end }}
+          </div>
+          <h3 class="mt-5 text-2xl font-semibold text-gray-900">{{ .heading }}</h3>
+          <p class="mt-4 text-gray-800 text-lg">{{ .text }}</p>
+        </div>
+      {{ end }}
+    </div>
+
+  </div>
+</div>

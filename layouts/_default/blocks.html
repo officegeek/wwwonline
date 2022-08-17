@@ -1,0 +1,7 @@
+{{ define "main" }}
+  {{ $blocks := .Params.blocks }}
+  {{ range $blocks }}
+    {{ $file := (printf "%s%s%s" "blocks/" .block ".html" ) }}
+    {{ partial $file . }}
+  {{ end }}
+{{ end }}

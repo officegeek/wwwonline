@@ -1,0 +1,15 @@
+{{define "main"}}
+<div class="bg-white px-4 sm:px-6 lg:px-8">
+  <div class="max-w-3xl mx-auto py-12">
+    <div class="text-center">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold lg:leading-tight text-gray-900">{{ .Title }}</h1>
+      {{ with .Params.subheading }}
+        <p class="mt-4 text-gray-800 text-[1.375rem] leading-relaxed">{{ . }}</p>
+      {{ end }}
+    </div>
+    <div class="prose prose-lg hover:prose-a:text-green-500 sm:prose-h2:text-4xl max-w-none mt-12">
+      {{ .Content }}
+    </div>
+  </div>
+</div>
+{{end}}

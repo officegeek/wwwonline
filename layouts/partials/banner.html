@@ -1,0 +1,9 @@
+<div class="bg-gradient-to-r from-violet-700 to-purple-500">
+  <div class="py-2 px-4 sm:px-10 text-center text-purple-100 text-sm font-semibold tracking-wide">
+    {{ if .Site.Params.banner_url }}
+      <a class="hover:text-purple-200" href="{{ .Site.Params.banner_url }}">{{ .Site.Params.banner_text }} →</a>
+    {{ else }}
+      {{ .Site.Params.banner_text }}
+    {{ end }}
+  </div>
+</div>

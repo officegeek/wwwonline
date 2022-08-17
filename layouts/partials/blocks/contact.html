@@ -1,0 +1,104 @@
+<div class="bg-white px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto py-12">
+    <div class="relative bg-white rounded-lg border border-green-100/75 overflow-hidden">
+      <h2 class="sr-only">{{ .heading }}</h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 ">
+        <!-- Contact information -->
+        <div class="relative overflow-hidden py-10 px-6 bg-green-50 sm:px-10 xl:p-12">
+          <div class="absolute inset-0 pointer-events-none sm:hidden" aria-hidden="true">
+            <svg class="absolute inset-0 w-full h-full" width="343" height="388" viewBox="0 0 343 388" fill="none" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <path d="M-99 461.107L608.107-246l707.103 707.107-707.103 707.103L-99 461.107z" fill="url(#linear1)" fill-opacity=".1" />
+              <defs>
+                <linearGradient id="linear1" x1="254.553" y1="107.554" x2="961.66" y2="814.66" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#fff"></stop>
+                  <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="hidden absolute top-0 right-0 bottom-0 w-1/2 pointer-events-none sm:block lg:hidden" aria-hidden="true">
+            <svg class="absolute inset-0 w-full h-full" width="359" height="339" viewBox="0 0 359 339" fill="none" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <path d="M-161 382.107L546.107-325l707.103 707.107-707.103 707.103L-161 382.107z" fill="url(#linear2)" fill-opacity=".1" />
+              <defs>
+                <linearGradient id="linear2" x1="192.553" y1="28.553" x2="899.66" y2="735.66" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#fff"></stop>
+                  <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="hidden absolute top-0 right-0 bottom-0 w-1/2 pointer-events-none lg:block" aria-hidden="true">
+            <svg class="absolute inset-0 w-full h-full" width="160" height="678" viewBox="0 0 160 678" fill="none" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <path d="M-161 679.107L546.107-28l707.103 707.107-707.103 707.103L-161 679.107z" fill="url(#linear3)" fill-opacity=".1" />
+              <defs>
+                <linearGradient id="linear3" x1="192.553" y1="325.553" x2="899.66" y2="1032.66" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#fff"></stop>
+                  <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-semibold text-gray-900">{{ .heading }}</h1>
+          {{ with .subheading }}
+            <p class="mt-8 text-lg text-gray-900 max-w-3xl">{{ . }}</p>
+          {{ end }}
+          {{ with site.Params.address }}
+            <address class="text-gray-900 not-italic mt-8 text-lg">{{ . }}</address>
+          {{ end }}
+
+          <dl class="mt-8 space-y-8">
+            {{ with site.Params.phone }}
+              <dt><span class="sr-only">Phone number</span></dt>
+              <dd class="flex text-lg text-gray-900">
+                <!-- Heroicon name: outline/phone -->
+                <svg class="flex-shrink-0 w-6 h-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <a class="hover:text-green-500 ml-3" href="tel:{{ . }}">{{ . }}</a>
+              </dd>
+            {{ end }}
+            {{ with site.Params.email }}
+              <dt><span class="sr-only">Email</span></dt>
+              <dd class="flex text-lg text-gray-900">
+                <!-- Heroicon name: outline/mail -->
+                <svg class="flex-shrink-0 w-6 h-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <a class="hover:text-green-500 ml-3" href="mailto:{{ . }}">{{ . }}</a>
+              </dd>
+            {{ end }}
+          </dl>
+          <div class="flex space-x-7 mt-10">
+            {{ with site.Params.social.facebook }}
+              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-green-500 hover:text-green-600">
+                <span class="sr-only">youtube</span>
+                <svg class="h-8 w-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 30 30" width="30px" height="30px">    <path d="M15,3C8.373,3,3,8.373,3,15c0,6.016,4.432,10.984,10.206,11.852V18.18h-2.969v-3.154h2.969v-2.099c0-3.475,1.693-5,4.581-5 c1.383,0,2.115,0.103,2.461,0.149v2.753h-1.97c-1.226,0-1.654,1.163-1.654,2.473v1.724h3.593L19.73,18.18h-3.106v8.697 C22.481,26.083,27,21.075,27,15C27,8.373,21.627,3,15,3z"/></svg>          
+              </a>
+            {{ end }}
+            {{ with site.Params.social.youtube }}
+              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-green-500 hover:text-green-600">
+                <span class="sr-only">youtube</span>
+                <svg class="h-8 w-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 30 30" width="30px" height="30px">    <path d="M 15 4 C 10.814 4 5.3808594 5.0488281 5.3808594 5.0488281 L 5.3671875 5.0644531 C 3.4606632 5.3693645 2 7.0076245 2 9 L 2 15 L 2 15.001953 L 2 21 L 2 21.001953 A 4 4 0 0 0 5.3769531 24.945312 L 5.3808594 24.951172 C 5.3808594 24.951172 10.814 26.001953 15 26.001953 C 19.186 26.001953 24.619141 24.951172 24.619141 24.951172 L 24.621094 24.949219 A 4 4 0 0 0 28 21.001953 L 28 21 L 28 15.001953 L 28 15 L 28 9 A 4 4 0 0 0 24.623047 5.0546875 L 24.619141 5.0488281 C 24.619141 5.0488281 19.186 4 15 4 z M 12 10.398438 L 20 15 L 12 19.601562 L 12 10.398438 z"/></svg>
+              </a>
+            {{ end }}
+            {{ with site.Params.social.linkedin }}
+              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="text-green-500 hover:text-green-600">
+                <span class="sr-only">linkedin</span>
+                <svg class="h-8 w-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="50px" height="50px">    <path d="M25,2C12.318,2,2,12.317,2,25s10.318,23,23,23s23-10.317,23-23S37.682,2,25,2z M18,35h-4V20h4V35z M16,17 c-1.105,0-2-0.895-2-2c0-1.105,0.895-2,2-2s2,0.895,2,2C18,16.105,17.105,17,16,17z M37,35h-4v-5v-2.5c0-1.925-1.575-3.5-3.5-3.5 S26,25.575,26,27.5V35h-4V20h4v1.816C27.168,20.694,28.752,20,30.5,20c3.59,0,6.5,2.91,6.5,6.5V35z"/></svg>          
+              </a>
+            {{ end }}
+          </div>
+    
+        </div>
+
+        <div class="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12 bg-green-50">
+          {{ with .form.heading }}
+            <h3 class="text-3xl sm:text-4xl font-semibold text-gray-900">{{ . }}</h3>
+          {{ end }}
+          {{ partial "form-contact.html" . }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

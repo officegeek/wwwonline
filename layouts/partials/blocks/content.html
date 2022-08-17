@@ -1,0 +1,44 @@
+<div class="relative {{ .background | default "bg-white" }} py-12 lg:py-20 px-4 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-md text-center sm:max-w-2xl">
+    {{ with .heading }}
+      <h2 class="text-4xl font-semibold leading-tight md:leading-tight text-gray-900 md:text-5xl">{{ . }}</h2>
+    {{ end }}
+    {{ with .subheading }}
+      <p class="mt-8 text-gray-800 text-[1.375rem] leading-relaxed">{{ . }}</p>
+    {{ end }}
+  </div>
+  {{ with .text }}
+    <div class="mt-10 mx-auto prose prose-xl max-w-4xl">{{ . | markdownify }}</div>
+  {{ end }}
+  {{ with .video }}
+    <div class="relative mt-12 max-w-3xl mx-auto">
+      <video id="video" class="rounded-lg relative" loop poster="{{ .image | absURL }}" >
+        <source src="{{ .file | absURL }}" type="video/mp4">
+      </video>
+      <button type="button" id="play-button" class="absolute inset-0 z-10 text-green-500 hover:text-green-600">
+        <svg class="w-20 h-20 absolute inset-x-1/2 inset-y-1/2 -translate-y-1/2 -translate-x-1/2" width="64" height="64" viewbox="0 0 64 64"  fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="32" r="32" fill="currentColor"></circle>
+          <path class="text-white" d="M40.5 31.13L26.5 23.05C26.348 22.9622 26.1755 22.916 26 22.916C25.8245 22.916 25.652 22.9622 25.5 23.05C25.3474 23.1381 25.2208 23.265 25.133 23.4177C25.0452 23.5705 24.9993 23.7438 25 23.92V40.08C24.9993 40.2562 25.0452 40.4295 25.133 40.5822C25.2208 40.735 25.3474 40.8619 25.5 40.95C25.652 41.0378 25.8245 41.084 26 41.084C26.1755 41.084 26.348 41.0378 26.5 40.95L40.5 32.87C40.6539 32.7828 40.7819 32.6563 40.871 32.5035C40.96 32.3506 41.007 32.1769 41.007 32C41.007 31.8231 40.96 31.6494 40.871 31.4965C40.7819 31.3437 40.6539 31.2172 40.5 31.13ZM27 38.35V25.65L38 32L27 38.35Z" fill="currentColor"></path>
+        </svg>
+      </button>
+    </div>
+    <script>
+      var playButton = document.getElementById("play-button");
+      playButton.addEventListener("click", function() {
+        if (video.paused == true) {
+          video.play();
+          playButton.classList.add("opacity-0");
+        } else {
+          video.pause();
+          playButton.classList.remove("opacity-0");
+        }
+      });
+    </script>      
+  {{ end }} 
+
+  {{ with .button }}
+    <div class="mt-12 text-center">
+      <a href="{{ .url | relURL }}" class="inline-block px-12 py-4 text-lg bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium">{{ .text }}</a>
+    </div>
+  {{ end }}
+</div>

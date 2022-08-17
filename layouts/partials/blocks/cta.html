@@ -1,0 +1,49 @@
+<section class="px-4 sm:px-6 lg:px-8 py-16 lg:py-32 overflow-hidden relative bg-contain bg-left bg-no-repeat" style="background-image: url({{ .image | absURL }});">
+  <div class="absolute inset-0 bg-gradient-to-l from-black via-black/75 to-black/25 lg:to-transparent"></div>
+  
+  <div class="max-w-md sm:max-w-2xl lg:max-w-7xl mx-auto relative">
+    <div class="grid lg:grid-cols-2 gap-12">
+      <div></div>
+      <div>
+        <div class="max-w-[31rem]">
+          <h2 class="text-4xl font-semibold md:text-5xl leading-tight md:leading-tight text-white">
+            {{ .heading | markdownify }}
+          </h2>
+          <svg class="mt-4" width="76" height="11" viewBox="0 0 76 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+            <use xlink:href="#_Image5" x="0" y="0" width="76px" height="11px"></use>
+            <defs>
+                <image id="_Image5" width="76px" height="11px" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAAALCAYAAADVymv/AAAACXBIWXMAAA7EAAAOxAGVKw4bAAACBklEQVRIieXWO2sVURQF4O9oJIgSX0hQfN0JapA0YiMOooWFYGNlIziVnYWdjf/Bv+AUFiltUygWAyIRCQmS5k5QxAeiJhcfhASPxRlQjAnmyYWs6swezt5r1uyz9gk2GFlVnMM3dDDXhFvY1qxPEveg549tWwkf8ap53olZTDVr6EWnzstn60hfWOuEWVUcx36cIO6HyGXpA1sY8FuctcZrvEUbnSC08R7vMFPn5fPVFliVYFlVXCWeQm9kL47ilCRKt2EWExgPtAnPMFnn5evlJPkvwbKq6Je64lIUr2Ef5nEWW5ZFu7vQxieMBeExxvCpzssPi21YVLCsKg5hEENRvCl1zmbAcBAeYKLOy6m/Xy4QLKuK08SrkSs4sxEMJe95hWl8bWJz+LGMHNulU7ANO7ALB6RhcHAFnMYwEoQpPKnz8iWNYM2Ra0XxDi5i9woKLIUORjHRGPE0vkvTcgaf67ycXOOaIKuKIfRJAvZJAvZF8QjO43QTWwpPMR6E+yGriv4o3sWtVXL7IfnBB4wG4bn0l75g/l/t3Q3IqqIlXWEOEy9EzknD65iF0/xnaFU37uH2Mut0JNXfNhNnAuN1XrZXR797kFXFoGRJ+5puzHG2B0f+M8ejIDzEG0zVeflifah2BxqLWGATPZJfdfBEujkPNCO2E8XrQRjGCL4uNW43C34Bl6SaKLMT/fAAAAAASUVORK5CYII="></image>
+            </defs>
+          </svg>
+          {{ with .text }}
+            <div class="mt-5 sm:mt-8 text-white text-xl leading-relaxed space-y-3">{{ . | markdownify }}</div>
+          {{ end }} 
+          <div class="mt-8 sm:mt-10">
+            {{ with .button }}
+              <a href="{{ .url | relURL }}"
+                class="inline-flex items-center font-medium text-lg text-white hover:text-green-500"
+              >
+                <span>{{ .text }}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div x-bind="modalVideoWindow" class="fixed inset-0 overflow-y-auto z-[99]" role="dialog" aria-modal="true" aria-labelledby="modal-title-1" style="display: none;">
+    <div x-show="modalVideoShow" x-transition.opacity="" class="fixed inset-0 bg-black bg-opacity-50" aria-hidden="true"></div>
+    <div x-show="modalVideoShow" x-transition="" x-on:click="modalVideoShow = false"
+      class="relative min-h-screen flex items-center justify-center p-4">
+      <div x-on:click.stop=""
+        class="relative max-w-3xl w-full bg-white rounded-lg shadow-lg p-4 overflow-y-auto">
+        <div class="aspect-w-16 aspect-h-9">
+          <iframe class="" width="560" height="315" src="https://www.youtube.com/embed/{{ .video.id }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+<div class="py-16 lg:py-24 {{ .background }}">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    {{ if or .heading .subheading }}
+      <div class="text-center mb-12">
+        {{ with .heading }}
+          <h2 class="text-3xl sm:text-4xl font-semibold leading-tight text-primary md:text-5xl">{{ . }}</h2>
+        {{ end }}
+        {{ with .subheading }}
+          <p class="mt-6 max-w-2xl text-lg sm:text-xl text-slate-500 lg:mx-auto">{{ . }}</p>
+        {{ end }}
+      </div>
+    {{ end }}
+
+    {{ $posts := where site.RegularPages "Section" "blog" }}
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 items-stretch">
+      {{ range first 3 $posts }}
+        {{ partial "card-post.html" . }}
+      {{ end }}
+    </div>
+
+  </div>
+</div>
