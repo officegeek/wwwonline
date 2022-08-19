@@ -54,31 +54,31 @@ params:
     linkedin: "#"
 
   navbar:
-  - name: Kurser
+  - name: Courses
     url: "/kurser/"
   - name: Webinar
     url: "/webinar/"
-  - name: En til En
+  - name: One to One
     url: "/en-til-en/"
-  - name: Spørgsmål
+  - name: Questions
     url: "/sporgsmal/"
   - name: Blog
     url: "/blog/"
-  - name: Om
+  - name: About
     url: "/om/"
-  - name: Kontakt
+  - name: Contact
     url: "/kontakt/"
 
   footer_1:
-    heading: Ydelser
+    heading: Services
     links: 
-    - name: Kurser
+    - name: Courses
       url: "/kurser/"
     - name: Webinar
       url: "/webinar/"
-    - name: En til En
+    - name: One to One
       url: "/en-til-en/"
-    - name: Spørgsmål
+    - name: Questions
       url: "/sporgsmal/"
 
   footer_2:
@@ -86,9 +86,9 @@ params:
     links: 
     - name: Blog
       url: "/blog/"
-    - name: Om
+    - name: About
       url: "/om/"
-    - name: Kontakt
+    - name: Contact
       url: "/kontakt/"
     - name: Terms
       url: "/terms/"
